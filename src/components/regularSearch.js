@@ -26,7 +26,7 @@ const RegularSearch = () => {
 			value={queryString}
 		/>
 
-		<h2>Query string: {results}</h2>
+		<p>Query string: {results}</p>
 	</div>
   );
 };
