@@ -1,14 +1,16 @@
-const customDebounce = (funCall, delay) => {
-	console.log('1');
-	let timer;
-	(function(...args) {
-		const context = this;
-		clearTimeout(timer);
-		timer = setTimeout(() => {
-			console.log('3');
-			funCall.apply(context, args);
-		}, delay);
-	})(funCall, delay);
+const customDebounce = (fn, delay=500) => {
+    let timeoutId;
+
+    return (...args) => {
+        // cancel the previous timer
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+        }
+        // setup a new timer
+        timeoutId = setTimeout(() => {
+            fn.apply(null, args);
+        }, delay);
+    };
 };
 
 const customThrottle = (funcCall, interval) => {

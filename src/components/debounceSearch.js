@@ -7,20 +7,13 @@ const DebounceSearch = () => {
   const [queryString, setQueryString] = useState('');
   const [results, setResults] = useState('');
 
-	const debouncedCall = (queryString) => {
-		helpers.customDebounce(()=>{
-			setQueryString(queryString);
-			FakeServerCall.get(queryString).then((results)=>{
-				setResults(`Results for ${results.queryString} on ${results.time}`);
-				// drop off loading indicator
-			});
-		}, 3000);
-	};
-
-	const handleChange = event => {
-	// show loading indicator
-		debouncedCall(event.target.value);
-	};
+	const handleChange = helpers.customDebounce(event=>{
+		//setQueryString(queryString);
+		FakeServerCall.get(event.target.value).then((results)=>{
+			setResults(`Results for ${results.queryString} on ${results.time}`);
+			// drop off loading indicator
+		});
+	}, 3000);
 
 	return (
 		<div>
@@ -30,7 +23,7 @@ const DebounceSearch = () => {
 				id="queryString"
 				name="queryString"
 				onChange={handleChange}
-				value={queryString}
+				//value={queryString}
 			/>
 
 			<h2>Query string: {results}</h2>

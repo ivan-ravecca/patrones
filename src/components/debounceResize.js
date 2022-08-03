@@ -1,9 +1,10 @@
 import React from 'react';
 import {useState} from 'react';
 import { Resizable } from "re-resizable";
+import helpers from '../utilities/helpers';
 
 
-const RegularResize = () => {
+const DebounceResize = () => {
 	const style = {
 		display: "flex",
 		alignItems: "center",
@@ -14,15 +15,16 @@ const RegularResize = () => {
 	const [componentWidth, setComponentWidth] = useState(200);
 	const [componentHeight, setComponentHeight] = useState(200);
 
-	const onResize = (width, height) => {
-		setComponentWidth(width);
-		setComponentHeight(height);
-	}
+    const debounceOnResize = helpers.customDebounce((width, height)=> {
+        setComponentWidth(width);
+        setComponentHeight(height);
+       
+    }, 3000);
 
 	return (
 		<Resizable
 		onResize={(e, direction, ref, d) => {
-			onResize(ref.offsetWidth, ref.offsetHeight);
+			debounceOnResize(ref.offsetWidth, ref.offsetHeight);
 		}}
 		style={style}
 		defaultSize={{
@@ -34,4 +36,4 @@ const RegularResize = () => {
 	  </Resizable>
 	)
 };
-export default RegularResize;
+export default DebounceResize;
