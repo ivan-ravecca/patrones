@@ -3,8 +3,8 @@ const customDebounce = (funCall, delay) => {
 	let timer;
 	(function(...args) {
 		const context = this;
-		clearTimeOut(timer);
-		timer = setTimeOut(() => {
+		clearTimeout(timer);
+		timer = setTimeout(() => {
 			console.log('3');
 			funCall.apply(context, args);
 		}, delay);
@@ -17,7 +17,7 @@ const customThrottle = (funcCall, interval) => {
 		if (shouldFire) {
 			funcCall();
 			shouldFire = false;
-			setTimeOut(() => {
+			setTimeout(() => {
 				shouldFire = true;
 			}, interval)
 		}
