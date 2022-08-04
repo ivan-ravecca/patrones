@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState} from 'react';
+import {useState, useCallback} from 'react';
 import FakeServerCall from '../services/fakeServerCall';
 import helpers from '../utilities/helpers';
 
@@ -7,14 +7,15 @@ const DebounceSearch = () => {
   const [queryString, setQueryString] = useState('');
   const [results, setResults] = useState('');
 
-	const handleChange = helpers.customDebounce(event=>{
-		//setQueryString(queryString);
-		FakeServerCall.get(event.target.value).then((results)=>{
+	const handleChange = (queryString) => {
+		FakeServerCall.get(queryString).then((results)=>{
 			setResults(`Results for ${results.queryString} on ${results.time}`);
-			// drop off loading indicator
 		});
-	}, 3000);
+	};
 
+	const optimizedFn = useCallback(helpers.customDebounce(handleChange, 2000), []);
+	// const optimizedFn = useCallback(helpers.customThrottle(handleChange, 10000), []);
+	
 	return (
 		<div>
 			<h1>Debounce search</h1>
@@ -22,11 +23,11 @@ const DebounceSearch = () => {
 				type="text"
 				id="queryString"
 				name="queryString"
-				onChange={handleChange}
-				//value={queryString}
+				onChange={(e) => {setQueryString(e.target.value); optimizedFn(e.target.value);}}
+				value={queryString}
 			/>
 
-			<h2>Query string: {results}</h2>
+			<p>Query string: {results}</p>
 		</div>
 	);
 };

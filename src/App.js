@@ -3,7 +3,8 @@ import './App.css';
 import RegularSearch from './components/regularSearch';
 import DebounceSearch from './components/debounceSearch';
 import RegularResize from './components/regularResize';
-import DebounceResize from './components/debounceResize';
+import ThrottleResize from './components/throttleResize';
+// import DebounceResize from './components/debounceResize';
 
 function App() {
 	return (
@@ -12,8 +13,8 @@ function App() {
 				<RegularSearch />
 				<DebounceSearch/>
 			</header>
-			<RegularResize/>
-			<DebounceResize/>
+			{/* <RegularResize/> */}
+			{/* <ThrottleResize/> */}
 		</div>
 	);
 }

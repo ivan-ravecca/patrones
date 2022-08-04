@@ -1,37 +1,30 @@
 import React from 'react';
-import {useState} from 'react';
-import { Resizable } from "re-resizable";
-
+import {useEffect, useState} from 'react';
 
 const RegularResize = () => {
-	const style = {
-		display: "flex",
-		alignItems: "center",
-		justifyContent: "center",
-		border: "solid 1px #ddd",
-		background: "#f0f0f0"
-	  };
-	const [componentWidth, setComponentWidth] = useState(200);
-	const [componentHeight, setComponentHeight] = useState(200);
+	const [dimensions, setDimensions] = useState({ 
+		height: window.innerHeight,
+		width: window.innerWidth
+	});
 
-	const onResize = (width, height) => {
-		setComponentWidth(width);
-		setComponentHeight(height);
-	}
+	useEffect(() => {
+		const handleResize = () =>{
+			setDimensions({
+				height: window.innerHeight,
+				width: window.innerWidth
+			});
+			console.log('RegularResize:::resized to: ', window.innerWidth, 'x', window.innerHeight)
+		}
+		window.addEventListener('resize', handleResize);
 
+		return () => { window.removeEventListener('resize', handleResize)};
+	});
+	
 	return (
-		<Resizable
-		onResize={(e, direction, ref, d) => {
-			onResize(ref.offsetWidth, ref.offsetHeight);
-		}}
-		style={style}
-		defaultSize={{
-		  width: 200,
-		  height: 200
-		}}
-	  >
-		My size is {componentWidth}px width and {componentHeight}px height.
-	  </Resizable>
-	)
+		<div id="regularResize" style={{ background:"Olive"}}>
+			<h1>Regular Resize</h1>
+			My size is {dimensions.width}px width and {dimensions.height}px height.
+		</div>
+	);
 };
 export default RegularResize;
