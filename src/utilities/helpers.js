@@ -1,4 +1,4 @@
-import isThisTheRealWorld from "../globals";
+import isThisTheRealWorld from "./globals";
 
 const customDebounce = (funCall, delay=500) => {
 	let timer;

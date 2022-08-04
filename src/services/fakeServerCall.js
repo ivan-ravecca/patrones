@@ -1,4 +1,4 @@
-import isThisTheRealWorld from '../globals';
+import isThisTheRealWorld from '../utilities/globals';
 import helpers from '../utilities/helpers';
 const internalGet = (queryString) => {
 	if(isThisTheRealWorld) console.log(`	FakeServerCall.get(${queryString})`);
