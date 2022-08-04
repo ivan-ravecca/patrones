@@ -6,11 +6,12 @@ import ThrottleResize from './components/throttleResize';
 
 function App() {
 	return (
-		<div className="App">
-			<header className="App-header">
+		<div className="App ">
+			<h1 className="text-3xl font-bold underline">
+				Hello world!
+			</h1>
 				<RegularSearch />
 				<DebounceSearch/>
-			</header>
 			<RegularResize/>
 			<ThrottleResize/>
 		</div>
