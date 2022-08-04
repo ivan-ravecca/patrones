@@ -11,8 +11,8 @@ function App() {
 				<RegularSearch />
 				<DebounceSearch/>
 			</header>
-			<ThrottleResize/>
 			<RegularResize/>
+			<ThrottleResize/>
 		</div>
 	);
 }

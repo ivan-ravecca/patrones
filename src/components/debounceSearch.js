@@ -14,7 +14,7 @@ const DebounceSearch = () => {
 	};
 
 	const optimizedFn = useCallback(helpers.customDebounce(handleChange, 2000), []);
-	// const optimizedFn = useCallback(helpers.customThrottle(handleChange, 10000), []);
+	//const optimizedFn = useCallback(helpers.customThrottle(handleChange, 10000), []);
 	
 	return (
 		<div>
