@@ -16,7 +16,6 @@ const customDebounce = (funCall, delay=500) => {
 
 const customThrottle = (funcCall, interval=500) => {
 	let shouldFire = true;
-	console.log(`customThrottle ${shouldFire} `);
 	return function() {
 		if (shouldFire) {
 			if(isThisTheRealWorld) console.info(`	>> customThrottle - excecuting function`);
