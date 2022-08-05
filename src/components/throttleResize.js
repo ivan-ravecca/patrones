@@ -25,8 +25,7 @@ const ThrottleResize = () => {
 
   useEffect(() => {
     window.addEventListener("resize", () => {
-      if (isThisTheRealWorld)
-        console.log("ThrottleResize:::: RESIZING DETECTED");
+      if (isThisTheRealWorld) console.log("ThrottleResize:::: RESIZING DETECTED");
       handleResizeThrottled();
     });
     return () => {
